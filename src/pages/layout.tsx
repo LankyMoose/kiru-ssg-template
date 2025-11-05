@@ -6,7 +6,7 @@ export default function RootLayout({ children }: { children: JSX.Children }) {
   return (
     <div className="min-h-screen flex flex-col gap-20 justify-between px-10 py-20">
       <h1 className="text-3xl md:text-4xl md:leading-normal font-bold text-center">
-        Welcome to your Kiru CSR app!
+        Welcome to your Kiru SSG app!
       </h1>
       <div className="flex gap-4 justify-center">
         <Link to="/" className={state.path === "/" ? "" : "underline"}>
