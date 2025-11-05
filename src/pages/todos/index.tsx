@@ -1,4 +1,5 @@
 import { Derive, signal, useComputed, useSignal } from "kiru"
+import { Head } from "kiru/router"
 import { className as cls } from "kiru/utils"
 
 interface Todo {
@@ -26,37 +27,42 @@ export default function TodosPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8 justify-center items-center">
-      <form onsubmit={(e) => (e.preventDefault(), handleAddTodo())}>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            bind:value={inputText}
-            placeholder="Make a new Todo"
-            className="bg-neutral-50/10 rounded px-4 py-2"
-          />
-          <button
-            type="submit"
-            disabled={disableSubmit}
-            className="bg-neutral-50/20 rounded px-4 py-2 disabled:opacity-50"
-          >
-            Add
-          </button>
+    <>
+      <Head.Content>
+        <title>Todos</title>
+      </Head.Content>
+      <div className="flex flex-col gap-8 justify-center items-center">
+        <form onsubmit={(e) => (e.preventDefault(), handleAddTodo())}>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              bind:value={inputText}
+              placeholder="Make a new Todo"
+              className="bg-neutral-50/10 rounded px-4 py-2"
+            />
+            <button
+              type="submit"
+              disabled={disableSubmit}
+              className="bg-neutral-50/20 rounded px-4 py-2 disabled:opacity-50"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+        <div>
+          <Derive from={todos}>
+            {(todos) => (
+              <ul className="text-xl flex flex-col gap-2">
+                {todos.length === 0 && <i>No todos</i>}
+                {todos.map((todo) => (
+                  <TodoItem key={todo.id} todo={todo} />
+                ))}
+              </ul>
+            )}
+          </Derive>
         </div>
-      </form>
-      <div>
-        <Derive from={todos}>
-          {(todos) => (
-            <ul className="text-xl flex flex-col gap-2">
-              {todos.length === 0 && <i>No todos</i>}
-              {todos.map((todo) => (
-                <TodoItem key={todo.id} todo={todo} />
-              ))}
-            </ul>
-          )}
-        </Derive>
       </div>
-    </div>
+    </>
   )
 }
 

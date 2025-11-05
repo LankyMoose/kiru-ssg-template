@@ -1,4 +1,5 @@
 import { useRef, useSignal } from "kiru"
+import { Head } from "kiru/router"
 
 export default function Page() {
   const count = useSignal(0)
@@ -19,17 +20,22 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col gap-8 justify-center items-center">
-      <button type="button" onclick={handleClick} className="cursor-pointer">
-        <img
-          src="/favicon.svg"
-          className="w-32 h-32 animate-pulse"
-          alt="kiru logo"
-        />
-      </button>
-      <span ref={countRef} className="text-4xl font-medium select-none">
-        {count}
-      </span>
-    </div>
+    <>
+      <Head.Content>
+        <title>Vite + TS + Kiru</title>
+      </Head.Content>
+      <div className="flex flex-col gap-8 justify-center items-center">
+        <button type="button" onclick={handleClick} className="cursor-pointer">
+          <img
+            src="/favicon.svg"
+            className="w-32 h-32 animate-pulse"
+            alt="kiru logo"
+          />
+        </button>
+        <span ref={countRef} className="text-4xl font-medium select-none">
+          {count}
+        </span>
+      </div>
+    </>
   )
 }
