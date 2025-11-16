@@ -1,5 +1,5 @@
 {
-  "name": "kiru-csr-template",
+  "name": "kiru-ssg-template",
   "private": true,
   "version": "0.0.0",
   "type": "module",
